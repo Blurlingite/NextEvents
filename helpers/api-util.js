@@ -9,7 +9,7 @@ export async function getAllEvents() {
   // Firebase returns data as an object, so transform it into an array of objects
   const events = [];
 
-  // the key are the fields you created:  e1, e2, etc
+  // the key are the fields you created on Firebase:  e1, e2, etc
   for (const key in data) {
     events.push({
       id: key,
@@ -23,4 +23,9 @@ export async function getAllEvents() {
 export async function getFeaturedEvents() {
   const allEvents = await getAllEvents();
   return allEvents.filter((event) => event.isFeatured); // filter out non-featured events
+}
+
+export async function getEventById(id) {
+  const allEvents = await getAllEvents();
+  return allEvents.find((event) => event.id === id);
 }
